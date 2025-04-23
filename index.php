@@ -4,11 +4,8 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="tr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
     <title>LiveTuMi</title>
     <script>
         function openTab(tabName, element) {
@@ -90,30 +87,34 @@
 
     <!-- Giriş Yapma Formu -->
     <div id="giris" class="form" style="display: block;">
-        <h3>Üye Girişi</h3>
-        <label for="girisEposta">Kullanıcı Adı : </label>
-        <input type = "email" name="girisEposta" id="girisEposta" placeholder = "tuanaakyazi@hotmail.com" required><br><br>
-        <label for="sifre">Şifre : </label>
-        <input type = "password" name="sifre" id="sifre" placeholder = "*" maxlength= "10" required><br><br>
-        <button type="submit">Giriş yap</button>
+        <form action ="",method ="post">
+            <h3>Üye Girişi</h3>
+            <label for="girisEposta">Kullanıcı Adı : </label>
+            <input type = "email" name="girisEposta" id="girisEposta" placeholder = "tuanaakyazi@hotmail.com" required><br><br>
+            <label for="sifre">Şifre : </label>
+            <input type = "password" name="sifre" id="sifre" placeholder = "*" maxlength= "10" required><br><br>
+            <button type="submit">Giriş yap</button>
+        </form>
     </div>
 
     <!-- Üye Olma Formu -->
     <div id="uye" class="form" style="display: none;">
-        <h3>Üye Ol</h3>
-        <label for="isim">Ad : </label>
-        <input type="text" name="isim" id="isim" placeholder="Ad" required><br><br>
-        <label for="soyad">Soyad : </label>
-        <input type="text" name="soyad" id="soyad" placeholder="Soyad" required><br><br>
-        <label for="dogum">Doğum Günü</label>
-        <input type ="date" name="dogum" id="dogum" placeholder="gg.aa.yyyy" required><br><br>
-        <label for="eposta">Kullanıcı Adı : </label>
-        <input type = "email" name="eposta" id="eposta" placeholder = "tuanaakyazi@hotmail.com" required><br><br>
-        <label for="sifre1">Şifre : </label>
-        <input type="password" name="sifre1" id="sifre1" placeholder="*" required><br><br>
-        <label for="sifre2">Şifre : </label>
-        <input type="password" name="sifre2" id="sifre2" placeholder="*" required><br><br>
-        <button type="submit" name="kaydet">Üye ol</button>
+        <form action ="kayit.php" ,method ="post">
+            <h3>Üye Ol</h3>
+            <label for="isim">Ad : </label>
+            <input type="text" name="isim" id="isim" placeholder="Ad" required><br><br>
+            <label for="soyad">Soyad : </label>
+            <input type="text" name="soyad" id="soyad" placeholder="Soyad" required><br><br>
+            <label for="dogum">Doğum Günü</label>
+            <input type ="date" name="dogum" id="dogum" placeholder="gg.aa.yyyy" required><br><br>
+            <label for="eposta">Kullanıcı Adı : </label>
+            <input type = "email" name="eposta" id="eposta" placeholder = "tuanaakyazi@hotmail.com" required><br><br>
+            <label for="sifre1">Şifre : </label>
+            <input type="password" name="sifre1" id="sifre1" placeholder="*" required><br><br>
+            <label for="sifre2">Şifre : </label>
+            <input type="password" name="sifre2" id="sifre2" placeholder="*" required><br><br>
+            <button type="submit" name="kaydet">Üye ol</button>
+        </form>
     </div>
 
 </body>
