@@ -1,10 +1,11 @@
 <?php
-    include("baglanti.php");
-    include("kayit.php");
+include("baglanti.php");
+include("kayit.php");
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>LiveTuMi</title>
     <script>
@@ -38,6 +39,7 @@
             font-family: Arial, sans-serif;
             color: white;
         }
+
         body::before {
             content: "";
             background-image: url("theatre1.png");
@@ -45,7 +47,7 @@
             background-repeat: no-repeat;
             background-position: center;
             background-attachment: fixed;
-            opacity: 0.7; 
+            opacity: 0.7;
             filter: brightness(0.6);
             position: fixed;
             top: 0;
@@ -54,9 +56,11 @@
             height: 100%;
             z-index: -1; /* Resim arka planda */
         }
+
         .tab-container {
             margin-bottom: 0px;
         }
+
         .tab {
             margin: 0 40px;
             border: none;
@@ -66,11 +70,13 @@
             border-radius: 5px;
             font-weight: bold;
         }
+
         .tab:hover {
             background-color: #666;
         }
+
         .form {
-            background-color: rgba(0, 0, 0, 0.6); 
+            background-color: rgba(0, 0, 0, 0.6);
             padding: 30px;
             border-radius: 10px;
             text-align: center;
@@ -79,6 +85,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="tab-container">
         <button class="tab" onclick="openTab('giris', this)">Giriş Yap</button>
@@ -87,28 +94,28 @@
 
     <!-- Giriş Yapma Formu -->
     <div id="giris" class="form" style="display: block;">
-        <form action ="" method ="post">
+        <form action="" method="post">
             <h3>Üye Girişi</h3>
             <label for="girisEposta">Kullanıcı Adı : </label>
-            <input type = "email" name="girisEposta" id="girisEposta" placeholder = "tuanaakyazi@hotmail.com" required><br><br>
+            <input type="email" name="girisEposta" id="girisEposta" placeholder="tuanaakyazi@hotmail.com" required><br><br>
             <label for="sifre">Şifre : </label>
-            <input type = "password" name="sifre" id="sifre" placeholder = "*" maxlength= "10" required><br><br>
+            <input type="password" name="sifre" id="sifre" placeholder="*" maxlength="10" required><br><br>
             <button type="submit">Giriş yap</button>
         </form>
     </div>
 
     <!-- Üye Olma Formu -->
     <div id="uye" class="form" style="display: none;">
-        <form action ="kayit.php" method ="post">
+        <form action="kayit.php" method="post">
             <h3>Üye Ol</h3>
             <label for="isim">Ad : </label>
             <input type="text" name="isim" id="isim" placeholder="Ad" required><br><br>
             <label for="soyad">Soyad : </label>
             <input type="text" name="soyad" id="soyad" placeholder="Soyad" required><br><br>
             <label for="dogum">Doğum Günü</label>
-            <input type ="date" name="dogum" id="dogum" placeholder="gg.aa.yyyy" required><br><br>
+            <input type="date" name="dogum" id="dogum" placeholder="gg.aa.yyyy" required><br><br>
             <label for="eposta">Kullanıcı Adı : </label>
-            <input type = "email" name="eposta" id="eposta" placeholder = "tuanaakyazi@hotmail.com" required><br><br>
+            <input type="email" name="eposta" id="eposta" placeholder="tuanaakyazi@hotmail.com" required><br><br>
             <label for="sifre1">Şifre : </label>
             <input type="password" name="sifre1" id="sifre1" placeholder="*" required><br><br>
             <label for="sifre2">Şifre : </label>
@@ -118,4 +125,5 @@
     </div>
 
 </body>
+
 </html>
