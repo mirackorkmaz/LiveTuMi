@@ -87,7 +87,7 @@
 
     <!-- Giriş Yapma Formu -->
     <div id="giris" class="form" style="display: block;">
-        <form action ="",method ="post">
+        <form action ="" method ="post">
             <h3>Üye Girişi</h3>
             <label for="girisEposta">Kullanıcı Adı : </label>
             <input type = "email" name="girisEposta" id="girisEposta" placeholder = "tuanaakyazi@hotmail.com" required><br><br>
@@ -99,7 +99,7 @@
 
     <!-- Üye Olma Formu -->
     <div id="uye" class="form" style="display: none;">
-        <form action ="kayit.php" ,method ="post">
+        <form action ="kayit.php" method ="post">
             <h3>Üye Ol</h3>
             <label for="isim">Ad : </label>
             <input type="text" name="isim" id="isim" placeholder="Ad" required><br><br>
