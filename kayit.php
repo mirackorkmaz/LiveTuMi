@@ -24,3 +24,4 @@ if (isset($_POST["kaydet"])) {
         echo "Kayit olma sirasinda bir problem olustu!" . mysqli_error($baglanti);
     }
 }
+?>
