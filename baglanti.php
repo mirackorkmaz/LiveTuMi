@@ -1,5 +1,5 @@
 <?php
-//kdsmfdsöşfösğ
+
 $vt_sunucu = "localhost";
 $vt_kullanici = "root";
 $vt_sifre = "";
