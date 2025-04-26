@@ -11,6 +11,7 @@ include("kayit.php");
     <script>
         function openTab(tabName, element) {
             var forms = document.getElementsByClassName("form");
+            15426
             var tabs = document.getElementsByClassName("tab");
             for (var i = 0; i < forms.length; i++) {
                 forms[i].style.display = "none";
