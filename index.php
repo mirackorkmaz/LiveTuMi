@@ -21,73 +21,9 @@ include("kayit.php");
             element.style.fontWeight = "bold";
         }
     </script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh; /* Ekranın yüksekliği kadar alan aç */
-            display: flex; /* Flexbox sistemi */
-            flex-direction: column; /* elemanları üst üste sıralamak için */
-            justify-content: center; /* dikeyde ortala */
-            align-items: center; /* yataya ortala */
-            font-family: Arial, sans-serif;
-            color: white;
-        }
-        body::before {
-            content: "";
-            background-image: url("cinema.png");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
-            opacity: 0.9; 
-            filter: brightness(0.4);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Resim arka planda */
-        }
-        .tab-container {
-            margin-bottom: 0px;
-        }
-        .tab {
-            margin: 0 40px;
-            border: none;
-            background-color: #444;
-            color: white;
-            cursor: pointer; /*buton uzerine geldiginde el isareti*/
-            border-radius: 15px;
-            font-weight: bold;
-        }
-        .tab:hover {
-            background-color: #666;
-        }
-        .form {
-            background-color: rgba(0, 0, 0, 0.6); 
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            width: 300px;
-            transition: all 0.5s ease; /*degisiklik oldugunda yumusak gecis*/
-        }
-        td label {
-            display: inline-block;
-            width: 120px;
-            text-align: right;          /* Bitişleri hizalanır (sağa yaslanır) */
-            padding-right: 10px;        /* Inputla arasında boşluk bırakır */
-        }
-
-        input {
-            padding: 5px;
-            border-radius: 5px;
-            border: none;
-            width: 160px;               /* Tüm inputlar aynı genişlikte */
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body>
+<body style="background-image: url(&quot;../imgs/cinema.png&quot;)"> 
     <div class="tab-container">
         <button class="tab" onclick="openTab('giris', this)">Giriş Yap</button>
         <button class="tab" onclick="openTab('uye', this)">Üye Ol</button>
@@ -113,8 +49,6 @@ include("kayit.php");
             </table>
         </form>
     </div>
-    
-
     <!-- Üye Olma Formu -->
     <div id="uye" class="form" style="display: none;">
         <form action ="",method ="post">
