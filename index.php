@@ -5,13 +5,11 @@ include("kayit.php");
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>LiveTuMi</title>
     <script>
         function openTab(tabName, element) {
             var forms = document.getElementsByClassName("form");
-            15426
             var tabs = document.getElementsByClassName("tab");
             for (var i = 0; i < forms.length; i++) {
                 forms[i].style.display = "none";
@@ -32,24 +30,18 @@ include("kayit.php");
             flex-direction: column; /* elemanları üst üste sıralamak için */
             justify-content: center; /* dikeyde ortala */
             align-items: center; /* yataya ortala */
-            background-image: url("theatre1.png");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
             font-family: Arial, sans-serif;
             color: white;
         }
-
         body::before {
             content: "";
-            background-image: url("theatre1.png");
+            background-image: url("cinema.png");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
             background-attachment: fixed;
-            opacity: 0.7;
-            filter: brightness(0.6);
+            opacity: 0.9; 
+            filter: brightness(0.4);
             position: fixed;
             top: 0;
             left: 0;
@@ -57,36 +49,44 @@ include("kayit.php");
             height: 100%;
             z-index: -1; /* Resim arka planda */
         }
-
         .tab-container {
             margin-bottom: 0px;
         }
-
         .tab {
             margin: 0 40px;
             border: none;
             background-color: #444;
             color: white;
-            cursor: pointer;
-            border-radius: 5px;
+            cursor: pointer; /*buton uzerine geldiginde el isareti*/
+            border-radius: 15px;
             font-weight: bold;
         }
-
         .tab:hover {
             background-color: #666;
         }
-
         .form {
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.6); 
             padding: 30px;
             border-radius: 10px;
             text-align: center;
             width: 300px;
-            transition: all 0.5s ease;
+            transition: all 0.5s ease; /*degisiklik oldugunda yumusak gecis*/
+        }
+        td label {
+            display: inline-block;
+            width: 120px;
+            text-align: right;          /* Bitişleri hizalanır (sağa yaslanır) */
+            padding-right: 10px;        /* Inputla arasında boşluk bırakır */
+        }
+
+        input {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            width: 160px;               /* Tüm inputlar aynı genişlikte */
         }
     </style>
 </head>
-
 <body>
     <div class="tab-container">
         <button class="tab" onclick="openTab('giris', this)">Giriş Yap</button>
@@ -97,34 +97,60 @@ include("kayit.php");
     <div id="giris" class="form" style="display: block;">
         <form action="" method="post">
             <h3>Üye Girişi</h3>
-            <label for="girisEposta">Kullanıcı Adı : </label>
-            <input type="email" name="girisEposta" id="girisEposta" placeholder="tuanaakyazi@hotmail.com" required><br><br>
-            <label for="sifre">Şifre : </label>
-            <input type="password" name="sifre" id="sifre" placeholder="*" maxlength="10" required><br><br>
-            <button type="submit">Giriş yap</button>
+            <table>
+                <tr>
+                    <td><label for="girisEposta">Kullanıcı Adı :</label></td>
+                    <td><input type="email" name="girisEposta" id="girisEposta" placeholder="tuanaakyazi@hotmail.com" required></td>
+                </tr>
+                <tr>
+                    <td><label for="sifre">Şifre :</label></td>
+                    <td><input type="password" name="sifre" id="sifre" placeholder="*****" maxlength="10" required></td>
+                </tr>
+                <tr>
+                    <td></td> <!-- butonu hizzalamak icin bos -->
+                    <td><button type="submit">Giriş yap</button></td>
+                </tr>
+            </table>
         </form>
     </div>
+    
 
     <!-- Üye Olma Formu -->
     <div id="uye" class="form" style="display: none;">
-        <form action="kayit.php" method="post">
+        <form action ="",method ="post">
             <h3>Üye Ol</h3>
-            <label for="isim">Ad : </label>
-            <input type="text" name="isim" id="isim" placeholder="Ad" required><br><br>
-            <label for="soyad">Soyad : </label>
-            <input type="text" name="soyad" id="soyad" placeholder="Soyad" required><br><br>
-            <label for="dogum">Doğum Günü</label>
-            <input type="date" name="dogum" id="dogum" placeholder="gg.aa.yyyy" required><br><br>
-            <label for="eposta">Kullanıcı Adı : </label>
-            <input type="email" name="eposta" id="eposta" placeholder="tuanaakyazi@hotmail.com" required><br><br>
-            <label for="sifre1">Şifre : </label>
-            <input type="password" name="sifre1" id="sifre1" placeholder="*" required><br><br>
-            <label for="sifre2">Şifre : </label>
-            <input type="password" name="sifre2" id="sifre2" placeholder="*" required><br><br>
-            <button type="submit" name="kaydet">Üye ol</button>
+            <table>
+                <tr>
+                    <td><label for="isim">Ad :</label></td>
+                    <td><input type="text" name="isim" id="isim" placeholder="Ad" required></td>
+                </tr>
+                <tr>
+                    <td><label for="soyad">Soyad :</label></td>
+                    <td><input type="text" name="soyad" id="soyad" placeholder="Soyad" required></td>
+                </tr>
+                <tr>
+                    <td><label for="dogum">Doğum Günü :</label></td>
+                    <td><input type="date" name="dogum" id="dogum" required></td>
+                </tr>
+                <tr>
+                    <td><label for="eposta">Kullanıcı Adı :</label></td>
+                    <td><input type="email" name="eposta" id="eposta" placeholder="tuanaakyazi@hotmail.com" required></td>
+                </tr>
+                <tr>
+                    <td><label for="sifre1">Şifre :</label></td>
+                    <td><input type="password" name="sifre1" id="sifre1" placeholder="*****" required></td>
+                </tr>
+                <tr>
+                    <td><label for="sifre2">Şifre Tekrar :</label></td>
+                    <td><input type="password" name="sifre2" id="sifre2" placeholder="*****" required></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="submit" name="kaydet">Üye Ol</button></td>
+                </tr>
+            </table>
         </form>
     </div>
 
 </body>
-
 </html>
