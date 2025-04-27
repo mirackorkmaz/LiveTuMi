@@ -23,7 +23,7 @@ include("kayit.php");
     </script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body style="background-image: url(&quot;../imgs/cinema.png&quot;)"> 
+<body style="background-image: url('./imgs/cinema.png'); background-size: cover; background-repeat: no-repeat;"> 
     <div class="tab-container">
         <button class="tab" onclick="openTab('giris', this)">Giriş Yap</button>
         <button class="tab" onclick="openTab('uye', this)">Üye Ol</button>
