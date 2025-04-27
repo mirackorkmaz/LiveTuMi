@@ -1,5 +1,6 @@
-body {
+body.login {
     margin: 0;
+    background-image: url("../imgs/cinema.png");
     padding: 0;
     height: 100vh; /* Ekranın yüksekliği kadar alan aç */
     display: flex; /* Flexbox sistemi */
@@ -25,6 +26,7 @@ body::before {
     z-index: -1; /* Resim arka planda */
 }
 .tab-container {
+    display: flex;
     margin-bottom: 0px;
 }
 .tab {
@@ -61,6 +63,21 @@ input {
     width: 160px;               /* Tüm inputlar aynı genişlikte */
 }
 
-.captions {
-    background-color: rgb(51, 51, 136);
+body.main{
+    margin:0;
+}
+.sections {
+    
+}
+
+#section1{
+    background-color: rgb(147, 216, 248);
+    height: 100px;
+    padding: 0 40px;
+}
+#logo{
+    font-size: 50px;
+    line-height: 100px;
+    font-family:'Brush Script MT', cursive;
+    color:white;
 }
