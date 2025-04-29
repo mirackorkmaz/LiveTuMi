@@ -1,10 +1,10 @@
 <?php
 include("baglanti.php");
-include("kayit.php");
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>LiveTuMi</title>
     <script>
@@ -23,7 +23,8 @@ include("kayit.php");
     </script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body class="login"> 
+
+<body class="login">
     <div class="tab-container">
         <button class="tab" onclick="openTab('giris', this)">Giriş Yap</button>
         <button class="tab" onclick="openTab('uye', this)">Üye Ol</button>
@@ -31,7 +32,7 @@ include("kayit.php");
 
     <!-- Giriş Yapma Formu -->
     <div id="giris" class="form" style="display: block;">
-        <form action="" method="post">
+        <form method="post">
             <h3>Üye Girişi</h3>
             <table>
                 <tr>
@@ -51,7 +52,7 @@ include("kayit.php");
     </div>
     <!-- Üye Olma Formu -->
     <div id="uye" class="form" style="display: none;">
-        <form action ="",method ="post">
+        <form method="post">
             <h3>Üye Ol</h3>
             <table>
                 <tr>
@@ -86,5 +87,30 @@ include("kayit.php");
         </form>
     </div>
 
+<?php
+if (isset($_POST["kaydet"])) {
+    $ad = mysqli_real_escape_string($baglanti, $_POST["isim"]);
+    $soyad = mysqli_real_escape_string($baglanti, $_POST["soyad"]);
+    $dogum_tarihi = $_POST["dogum"];
+    $email = mysqli_real_escape_string($baglanti, $_POST["eposta"]);
+    $parola = $_POST["sifre1"];
+    $parola_tekrari = $_POST["sifre2"];
+
+    $ekle_sorgusu = "INSERT INTO kullanicilar (ad, soyad, email, parola, dogum_tarihi)
+                     VALUES ('$ad', '$soyad', '$email', '$parola', '$dogum_tarihi')";
+
+    $email_kontrol = mysqli_query($baglanti, "SELECT * FROM kullanicilar WHERE email = '$email'");
+
+    if ($parola != $parola_tekrari) {
+        echo '<div class="warning"> <p><strong>Warning!</strong> Some text...</p> </div>';
+    } elseif (mysqli_num_rows($email_kontrol) > 0) {
+        echo '<div class="danger"> <p><strong>Danger!</strong> Some text...</p> </div>';
+    } else {
+        $ekle_sorgusunu_calistir = mysqli_query($baglanti, $ekle_sorgusu);
+        echo '<div class="success"> <p><strong>Success!</strong> Some text...</p> </div>';
+    }
+    mysqli_close($baglanti);
+}
+?>
 </body>
 </html>
