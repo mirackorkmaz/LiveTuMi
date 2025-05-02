@@ -1,116 +1,20 @@
 <?php
-include("baglanti.php");
-?>
+session_start();
+if (isset($_SESSION["id"])) {
+    include("baglanti.php");
+    $id = $_SESSION["id"];
+    $sorgu = mysqli_query($baglanti, "SELECT * FROM kullanicilar WHERE id='$id'");
+    $kullanici = mysqli_fetch_assoc($sorgu);
+    $ad = $kullanici["ad"];
+    $soyad = $kullanici["soyad"];
+    $mailadresi = $kullanici["mailadresi"];
+    $dogumtarihi = $kullanici["dogumtarihi"];
+    $status = $kullanici["status"];
 
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>LiveTuMi</title>
-    <script>
-        function openTab(tabName, element) {
-            var forms = document.getElementsByClassName("form");
-            var tabs = document.getElementsByClassName("tab");
-            for (var i = 0; i < forms.length; i++) {
-                forms[i].style.display = "none";
-            }
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].style.fontWeight = "normal";
-            }
-            document.getElementById(tabName).style.display = "block";
-            element.style.fontWeight = "bold";
-        }
-    </script>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-
-<body class="login">
-    <div class="tab-container">
-        <button class="tab" onclick="openTab('giris', this)">Giriş Yap</button>
-        <button class="tab" onclick="openTab('uye', this)">Üye Ol</button>
-    </div>
-
-    <!-- Giriş Yapma Formu -->
-    <div id="giris" class="form" style="display: block;">
-        <form method="post">
-            <h3>Üye Girişi</h3>
-            <table>
-                <tr>
-                    <td><label for="girisEposta">Kullanıcı Adı :</label></td>
-                    <td><input type="email" name="girisEposta" id="girisEposta" placeholder="tuanaakyazi@hotmail.com" required></td>
-                </tr>
-                <tr>
-                    <td><label for="sifre">Şifre :</label></td>
-                    <td><input type="password" name="sifre" id="sifre" placeholder="*****" maxlength="10" required></td>
-                </tr>
-                <tr>
-                    <td></td> <!-- butonu hizzalamak icin bos -->
-                    <td><button type="submit">Giriş yap</button></td>
-                </tr>
-            </table>
-        </form>
-    </div>
-    <!-- Üye Olma Formu -->
-    <div id="uye" class="form" style="display: none;">
-        <form method="post">
-            <h3>Üye Ol</h3>
-            <table>
-                <tr>
-                    <td><label for="isim">Ad :</label></td>
-                    <td><input type="text" name="isim" id="isim" placeholder="Ad" required></td>
-                </tr>
-                <tr>
-                    <td><label for="soyad">Soyad :</label></td>
-                    <td><input type="text" name="soyad" id="soyad" placeholder="Soyad" required></td>
-                </tr>
-                <tr>
-                    <td><label for="dogum">Doğum Günü :</label></td>
-                    <td><input type="date" name="dogum" id="dogum" required></td>
-                </tr>
-                <tr>
-                    <td><label for="eposta">Kullanıcı Adı :</label></td>
-                    <td><input type="email" name="eposta" id="eposta" placeholder="tuanaakyazi@hotmail.com" required></td>
-                </tr>
-                <tr>
-                    <td><label for="sifre1">Şifre :</label></td>
-                    <td><input type="password" name="sifre1" id="sifre1" placeholder="*****" required></td>
-                </tr>
-                <tr>
-                    <td><label for="sifre2">Şifre Tekrar :</label></td>
-                    <td><input type="password" name="sifre2" id="sifre2" placeholder="*****" required></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><button type="submit" name="kaydet">Üye Ol</button></td>
-                </tr>
-            </table>
-        </form>
-    </div>
-
-<?php
-if (isset($_POST["kaydet"])) {
-    $ad = mysqli_real_escape_string($baglanti, $_POST["isim"]);
-    $soyad = mysqli_real_escape_string($baglanti, $_POST["soyad"]);
-    $dogum_tarihi = $_POST["dogum"];
-    $email = mysqli_real_escape_string($baglanti, $_POST["eposta"]);
-    $parola = $_POST["sifre1"];
-    $parola_tekrari = $_POST["sifre2"];
-
-    $ekle_sorgusu = "INSERT INTO kullanicilar (ad, soyad, email, parola, dogum_tarihi)
-                     VALUES ('$ad', '$soyad', '$email', '$parola', '$dogum_tarihi')";
-
-    $email_kontrol = mysqli_query($baglanti, "SELECT * FROM kullanicilar WHERE email = '$email'");
-
-    if ($parola != $parola_tekrari) {
-        echo '<div class="warning"> <p><strong>Warning!</strong> Some text...</p> </div>';
-    } elseif (mysqli_num_rows($email_kontrol) > 0) {
-        echo '<div class="danger"> <p><strong>Danger!</strong> Some text...</p> </div>';
-    } else {
-        $ekle_sorgusunu_calistir = mysqli_query($baglanti, $ekle_sorgusu);
-        echo '<div class="success"> <p><strong>Success!</strong> Some text...</p> </div>';
-    }
-    mysqli_close($baglanti);
+    echo "<center><h1>Hoşgeldiniz, $ad $soyad!</h1></center>";
+    echo "<center>Oturumu kapatmak için <a href='cikis.php'>buraya</a> tiklayin.</center>";
+} else {
+    header("Location: girisformu.php");
+    exit;
 }
 ?>
-</body>
-</html>
