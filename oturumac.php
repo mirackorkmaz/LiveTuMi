@@ -4,6 +4,15 @@ include("baglanti.php");
 $mailadresi = mysqli_real_escape_string($baglanti, $_POST["mailadresi"]);
 $parola = $_POST["parola"];
 
+// Eğer kullanıcı adı ve şifre "admin" ise, doğrudan yönlendir
+if ($mailadresi === "admin@admin.com" && $parola === "admin") {
+    session_start();
+    $_SESSION["id"] = "admin"; // Yönetici için özel bir oturum değeri
+    echo "<center><br>Yönetici girişi başarili! Yönlendiriliyorsunuz...</center>";
+    header("Refresh: 4; url=yonetici.php");
+    exit;
+}
+
 $sorgu = mysqli_query($baglanti, "SELECT id, status FROM kullanicilar WHERE mailadresi='$mailadresi' AND parola='$parola'");
 if (mysqli_num_rows($sorgu) == 0) {
     echo "<center><br>Giriş başarisiz! Lütfen bilgilerinizi kontrol edin.</center>";
