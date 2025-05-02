@@ -1,5 +1,16 @@
 <?php
 include("baglanti.php");
+session_start();
+
+// Eğer oturum açılmamışsa veya oturumdaki id "admin" değilse giriş sayfasına yönlendir
+if (!isset($_SESSION["id"]) || $_SESSION["id"] !== "admin") {
+    echo "<center><br>Bu sayfaya erişim izniniz yok. Lütfen giriş yapin.</center>";
+    header("Refresh: 3; url=girisformu.php");
+    exit;
+}
+
+// Yönetici sayfasının içeriği burada devam eder
+echo "<center><h1>Hoşgeldiniz, Yönetici!</h1></center>";
 ?>
 <!DOCTYPE html>
 <html lang="tr">
@@ -67,6 +78,21 @@ include("baglanti.php");
 
         #yonetici-bolum3 .form-kapsayici input[type="submit"]:hover {
             background-color: #0056b3;
+        }
+
+        #cikis-buton {
+            margin: 20px;
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        #cikis-buton:hover {
+            background-color: #c82333;
         }
     </style>
 </head>
@@ -145,6 +171,9 @@ include("baglanti.php");
         <h2>Bölüm 4: Diğer İşlemler</h2>
         <p>Bu alan aşkomun işlemleri için ayrilmiştir.</p>
     </section>
+    <center>
+        <a href="cikis.php" id="cikis-buton">Çikiş Yap</a>
+    </center>
 </body>
 
 </html>
