@@ -334,7 +334,7 @@ if (isset($_SESSION["id"])) {
                 echo "<div class='sepet-footer'>";
                 echo "<p class='toplam-tutar'>Toplam Tutar: <span>" . $toplam_fiyat . " TL</span></p>";
                 echo "<form action='satinal.php' method='POST'>
-                    <button type='submit' class='satinal-button'>Satın Al</button>
+                    <button type='submit' class='satinal-button'>Satın All</button>
                   </form>";
                 echo "</div>";
             } else {
