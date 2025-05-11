@@ -55,10 +55,16 @@ if (isset($_SESSION["id"])) {
     <title>LiveTuMi | Anasayfa</title>
     <link rel="icon" href="imgs/favicon.png" type="image/x-icon">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            display: flex;
+            background: linear-gradient(to bottom,rgb(7, 7, 7),rgb(48, 2, 2),rgb(24, 1, 1), #1a1a1a);            display: flex;
             flex-direction: column;
             margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
         }
 
@@ -66,19 +72,21 @@ if (isset($_SESSION["id"])) {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin: 0;
             padding: 10px 20px;
-            background-color: #f1f1f1;
-            border-bottom: 1px solid #ddd;
+            background-color:rgb(7,7,7);
         }
 
         .header h1 {
+            color: rgb(170, 168, 168);;
             margin: 0;
+            padding: 0;
             font-size: 18px;
         }
 
         .header a {
             text-decoration: none;
-            color: #007bff;
+            color:rgb(170, 168, 168);
             font-weight: bold;
         }
 
@@ -91,10 +99,10 @@ if (isset($_SESSION["id"])) {
 
         .tur-buttons a {
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color:rgb(172, 68, 68);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 10px;
             font-weight: bold;
         }
 
@@ -171,8 +179,7 @@ if (isset($_SESSION["id"])) {
         .sepet-container {
             flex: 1;
             padding: 20px;
-            background-color: #f9f9f9;
-            border-left: 1px solid #ddd;
+            background-color:rgb(48, 3, 3);
             height: 100vh;
             overflow-y: auto;
         }
@@ -263,6 +270,63 @@ if (isset($_SESSION["id"])) {
         .satinal-button:hover {
             background-color: #218838;
         }
+        .slider-container {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(112, 4, 4, 0.3);
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* Internet Explorer ve Edge */
+        }
+
+        .slider-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari için */
+        }
+
+
+        .slider {
+            display: flex;
+            scroll-behavior: smooth;
+            width: 100%;
+        }
+
+        .slide {
+            flex: none;
+            width: 100%;
+            height: 400px;
+            scroll-snap-align: start;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .dot-nav {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            margin: 0 5px;
+            background-color: #aaa;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .dot:hover,
+        .dot:focus {
+            background-color: #c00; /* bordo tonu */
+        }
+
     </style>
 </head>
 
@@ -272,6 +336,19 @@ if (isset($_SESSION["id"])) {
         <a href="cikis.php">Çıkış Yap</a>
     </div>
 
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide" id="slide1"><img src="imgs/ts.JPG" alt="Image 1"></div>
+            <div class="slide" id="slide2"><img src="image2.jpg" alt="Image 2"></div>
+            <div class="slide" id="slide3"><img src="image3.jpg" alt="Image 3"></div>
+        </div>
+    </div>
+
+    <div class="dot-nav">
+        <a href="#slide1" class="dot"></a>
+        <a href="#slide2" class="dot"></a>
+        <a href="#slide3" class="dot"></a>
+    </div>
     <!-- Tür Butonları -->
     <div class="tur-buttons">
         <a href="index.php">Tüm Etkinlikler</a>
@@ -281,7 +358,6 @@ if (isset($_SESSION["id"])) {
         }
         ?>
     </div>
-
     <div class="main">
         <div class="etkinlikler-container">
             <?php
@@ -344,7 +420,6 @@ if (isset($_SESSION["id"])) {
         </div>
     </div>
 </body>
-
 </html>
 <?php
 } else {
