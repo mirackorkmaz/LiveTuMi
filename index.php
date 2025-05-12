@@ -55,11 +55,6 @@ if (isset($_SESSION["id"])) {
     <title>LiveTuMi | Anasayfa</title>
     <link rel="icon" href="imgs/favicon.png" type="image/x-icon">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         body {
             background: linear-gradient(to bottom,rgb(7, 7, 7),rgb(48, 2, 2),rgb(24, 1, 1), #1a1a1a);            display: flex;
             flex-direction: column;
@@ -99,15 +94,16 @@ if (isset($_SESSION["id"])) {
 
         .tur-buttons a {
             padding: 10px 20px;
-            background-color:rgb(172, 68, 68);
+            background-color:rgb(51, 14, 14);
             color: white;
             text-decoration: none;
             border-radius: 10px;
             font-weight: bold;
+            box-shadow: 0 0 10px rgb(83, 47, 47); /* yeşilimsi parlama */
         }
 
         .tur-buttons a:hover {
-            background-color: #0056b3;
+            box-shadow: 0 0 10px rgb(170, 168, 168); /* yeşilimsi parlama */
         }
 
         .main {
@@ -129,7 +125,7 @@ if (isset($_SESSION["id"])) {
             border-radius: 10px;
             padding: 15px;
             width: 300px;
-            background-color: #f9f9f9;
+            background-color:rgb(170, 168, 168);
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -170,29 +166,55 @@ if (isset($_SESSION["id"])) {
             display: inline-block;
             margin-top: 10px;
             padding: 10px 20px;
-            background-color: #dc3545;
+            background-color:rgb(146, 19, 32);
             color: white;
             border-radius: 5px;
             font-weight: bold;
         }
 
         .sepet-container {
-            flex: 1;
-            padding: 20px;
-            background-color:rgb(48, 3, 3);
+            position: fixed;
+            top: 0;
+            right: -400px; /* ekran dışında başlasın */
+            width: 350px;
             height: 100vh;
+            background-color: rgb(48, 3, 3);
+            padding: 20px;
+            box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
             overflow-y: auto;
+            z-index: 1000;
+            transition: right 0.3s ease;
+        }
+        .sepet-container.acik {
+            right: 0;
+        }
+        .sepet-ac-button {
+            background-color: transparent;
+            border: none;
+            color: rgb(170, 168, 168);
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .sepet-ac-button:hover {
+            color: #fff;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .sepet-container h2 {
             text-align: center;
-            color: #333;
+            color: rgb(170, 168, 168);
         }
 
         .sepet-item {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 15px;;
         }
 
         .sepet-item img {
@@ -206,7 +228,7 @@ if (isset($_SESSION["id"])) {
         .sepet-item p {
             margin: 0;
             flex: 1;
-            color: #555;
+            color: rgb(170, 168, 168);;
         }
 
         .adet-buttons {
@@ -249,7 +271,7 @@ if (isset($_SESSION["id"])) {
         .toplam-tutar {
             font-size: 16px;
             font-weight: bold;
-            color: #333;
+            color: rgb(170, 168, 168);
         }
 
         .toplam-tutar span {
@@ -277,7 +299,7 @@ if (isset($_SESSION["id"])) {
             max-width: 1000px;
             margin: 30px auto;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(112, 4, 4, 0.3);
+            box-shadow: 0 4px 10px rgb(134, 120, 120);
             scrollbar-width: none; /* Firefox */
             -ms-overflow-style: none; /* Internet Explorer ve Edge */
         }
@@ -329,17 +351,37 @@ if (isset($_SESSION["id"])) {
 
     </style>
 </head>
+<script>
+//sepet simgesine tıklandığında sepeti aç
+function toggleSepet() {
+    const sepet = document.querySelector('.sepet-container');
+    sepet.classList.toggle('acik');
+}
 
+// Sepete tıklanmadıysa kapat
+document.addEventListener('click', function (event) {
+    const sepet = document.querySelector('.sepet-container');
+    const sepetButton = document.querySelector('.sepet-ac-button');
+
+    // Eğer tıklanan yer sepetin içi veya sepet açma butonu değilse, kapat
+    if (!sepet.contains(event.target) && !sepetButton.contains(event.target)) {
+        sepet.classList.remove('acik');
+    }
+});
+</script>
 <body>
     <div class="header">
         <h1>Hoş Geldin, <?php echo $ad . " " . $soyad; ?></h1>
-        <a href="cikis.php">Çıkış Yap</a>
+        <div class="header-buttons">
+            <a href="cikis.php">Çıkış Yap</a>
+            <button class="sepet-ac-button" onclick="toggleSepet()">🛒</button>
+        </div>
     </div>
 
     <div class="slider-container">
         <div class="slider">
             <div class="slide" id="slide1"><img src="imgs/ts.JPG" alt="Image 1"></div>
-            <div class="slide" id="slide2"><img src="image2.jpg" alt="Image 2"></div>
+            <div class="slide" id="slide2"><img src="imgs/indir.jpeg" alt="Image 2"></div>
             <div class="slide" id="slide3"><img src="image3.jpg" alt="Image 3"></div>
         </div>
     </div>
