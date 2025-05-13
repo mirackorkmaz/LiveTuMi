@@ -56,11 +56,12 @@ if (isset($_SESSION["id"])) {
     <link rel="icon" href="imgs/favicon.png" type="image/x-icon">
     <style>
         body {
-            background: linear-gradient(to bottom,rgb(7, 7, 7),rgb(48, 2, 2),rgb(24, 1, 1), #1a1a1a);            display: flex;
+            background: linear-gradient(to bottom,rgb(77, 19, 19),rgb(165, 155, 155),rgb(163, 152, 152),rgb(77, 19, 19));            
+            display: flex;
             flex-direction: column;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: Cursive, Lucida Handwriting ;
         }
 
         .header {
@@ -69,14 +70,14 @@ if (isset($_SESSION["id"])) {
             align-items: center;
             margin: 0;
             padding: 10px 20px;
-            background-color:rgb(7,7,7);
+            background-color:rgb(78, 10, 10);
         }
 
         .header h1 {
             color: rgb(170, 168, 168);;
             margin: 0;
             padding: 0;
-            font-size: 18px;
+            font-size: 20px;
         }
 
         .header a {
@@ -90,20 +91,24 @@ if (isset($_SESSION["id"])) {
             justify-content: center;
             margin: 20px 0;
             gap: 10px;
+            border: 3px solid transparent; /* Başlangıçta boş ama yer kaplar */
         }
 
         .tur-buttons a {
-            padding: 10px 20px;
-            background-color:rgb(51, 14, 14);
-            color: white;
+            padding: 6px 20px;
+            background-color:rgb(230, 219, 219);
+            color: rgb(110, 98, 98);
             text-decoration: none;
             border-radius: 10px;
             font-weight: bold;
-            box-shadow: 0 0 10px rgb(83, 47, 47); /* yeşilimsi parlama */
+            box-shadow: 0 0 10px rgb(218, 210, 210); 
+            border: 3px solid transparent; /* Başlangıçta boş ama yer kaplar */
+            transition: all 0.3s ease
         }
 
         .tur-buttons a:hover {
-            box-shadow: 0 0 10px rgb(170, 168, 168); /* yeşilimsi parlama */
+            box-shadow: 0 0 10px rgb(129, 25, 25); 
+            border: 3px solid rgb(160, 44, 44);
         }
 
         .main {
@@ -125,9 +130,9 @@ if (isset($_SESSION["id"])) {
             border-radius: 10px;
             padding: 15px;
             width: 300px;
-            background-color:rgb(170, 168, 168);
+            background-color:rgb(230, 219, 219);
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(221, 213, 213, 0.1);
         }
 
         .etkinlik-foto {
@@ -178,7 +183,7 @@ if (isset($_SESSION["id"])) {
             right: -400px; /* ekran dışında başlasın */
             width: 350px;
             height: 100vh;
-            background-color: rgb(48, 3, 3);
+            background-color: rgb(78, 10, 10);
             padding: 20px;
             box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
             overflow-y: auto;
