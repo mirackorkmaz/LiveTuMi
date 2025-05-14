@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="giris">
     <center>
         <i><b class="kullanici-giris-formu" >Kullanici Giriş Formu</b></i>
         <br><br>
