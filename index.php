@@ -53,7 +53,7 @@ if (isset($_SESSION["id"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LiveTuMi | Anasayfa</title>
-    <link rel="icon" href="imgs/favicon.png" type="image/x-icon">
+    <link rel="icon" href="imgs/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <script>
@@ -76,6 +76,7 @@ document.addEventListener('click', function (event) {
 </script>
 <body class="index">
     <div class="header">
+        <img src="imgs/logo.png" alt="Logo" width="50">
         <h1>Hoş Geldin, <?php echo $ad . " " . $soyad; ?></h1>
         <div class="header-buttons">
             <a href="cikis.php">Çıkış Yap</a>
@@ -85,7 +86,7 @@ document.addEventListener('click', function (event) {
 
     <div class="slider-container">
         <div class="slider">
-            <div class="slide" id="slide1"><img src="imgs/ts.JPG" alt="Image 1"></div>
+            <div class="slide" id="slide1"><img src="imgs/reklam_1.png" alt="Image 1"></div>
             <div class="slide" id="slide2"><img src="imgs/indir.jpeg" alt="Image 2"></div>
             <div class="slide" id="slide3"><img src="image3.jpg" alt="Image 3"></div>
         </div>

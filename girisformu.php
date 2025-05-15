@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="imgs/favicon.png" type="image/x-icon">
-    <title>Kullanici Girisi | LiveTuMi</title>
+    <link rel="icon" href="imgs/logo.png" type="image/x-icon">
+    <title>Giriş Yap | LiveTuMi</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -47,7 +47,7 @@
         changeBackground();
     </script>
     <center>
-        <i><b class="kullanici-giris-formu">Giriş Yap -- Eğlenceye Katıl 👻</b></i>
+        <img src="imgs/logo.png" alt="LiveTuMi Logo" width="100">
         <br><br>
         <div class="tablo-kapsayici">
             <table>
