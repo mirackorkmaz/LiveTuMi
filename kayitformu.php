@@ -1,102 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="imgs/favicon.png" type="image/x-icon">
     <title>Kullanici Kaydi | LiveTuMi</title>
-    <style>
-        body {
-            background-image: url('imgs/cinema.png');
-            background-size: 100% 100%; /* Resmi sayfanın genişliğine ve yüksekliğine sığdır */
-            background-repeat: no-repeat; /* Resmin tekrar etmesini engelle */
-            background-position: center; /* Resmi ortala */
-            height: 100vh; /* Sayfanın yüksekliğini tam olarak kapla */
-            margin: 0; /* Tarayıcı varsayılan boşluklarını kaldır */
-            display: flex; /* Flexbox kullanarak içeriği ortala */
-            justify-content: center; /* Yatayda ortala */
-            align-items: center; /* Dikeyde ortala */
-            color: white; /* Yazı rengi beyaz */
-            font-family: Arial, sans-serif; /* Yazı tipi */
-            text-align: center; /* Metni ortala */
-            font-size: 18px; /* Yazı boyutu */
-            line-height: 1.5; /* Satır yüksekliği */
-            padding: 20px; /* İçerik çevresine boşluk ekle */
-            box-sizing: border-box; /* İçerik ve kenar boşluklarını kapsayıcıya dahil et */
-            overflow: hidden; /* Taşan içeriği gizle */
-            position: relative; /* Konumlandırma için gerekli */
-            z-index: 1; /* Diğer öğelerin üstünde görünmesi için */
-            filter: blur(0px); /* Arka plan bulanıklığını kaldır */
-            transition: filter 0.3s ease; /* Geçiş efekti ekle */
-        }
-
-        .tablo-kapsayici {
-            background-color: rgba(0, 0, 0, 0.6); /* Beyaz arka plan ve %80 opasite */
-            color: white; /* Yazı rengi beyaz */
-            font-family: Arial, sans-serif; /* Yazı tipi */
-            border-radius: 10px; /* Köşeleri yuvarlat */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölge efekti */
-            padding: 15px; /* Tablo çevresine boşluk ekle */
-            display: inline-block; /* İçeriği ortalamak için */
-        }
-
-        table {
-            border-spacing: 0; /* Hücreler arasındaki boşlukları kaldır */
-            width: 100%; /* Tablo genişliğini %100 yap */
-            max-width: 600px; /* Maksimum genişlik ayarla */
-            margin: 0 auto; /* Ortala */
-            border-collapse: collapse; /* Kenarları birleştir */
-        }
-
-        td {
-            padding: 10px; /* Hücrelere iç boşluk ekle */
-            text-align: left; /* Metni sola hizala */
-            color: white; /* Yazı rengi beyaz */
-            font-size: 18px; /* Yazı boyutu */
-            font-family: Arial, sans-serif; /* Yazı tipi */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Alt kenar çizgisi */
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+
+<body class="giris">
+    <div class="preload-images">
+        <img src="imgs/form_bg/bg_1.jpg" alt="bg_1">
+        <img src="imgs/form_bg/bg_2.jpg" alt="bg_2">
+        <img src="imgs/form_bg/bg_3.jpg" alt="bg_3">
+        <img src="imgs/form_bg/bg_4.jpg" alt="bg_4">
+        <img src="imgs/form_bg/bg_5.jpg" alt="bg_5">
+        <img src="imgs/form_bg/bg_6.jpg" alt="bg_6">
+        <img src="imgs/form_bg/bg_7.jpg" alt="bg_7">
+        <img src="imgs/form_bg/bg_8.jpg" alt="bg_8">
+    </div>
+    <script>
+        // Arka plan resimlerini sırayla değiştiren JavaScript kodu
+        const images = [
+            "imgs/form_bg/bg_1.jpg",
+            "imgs/form_bg/bg_2.jpg",
+            "imgs/form_bg/bg_3.jpg",
+            "imgs/form_bg/bg_4.jpg",
+            "imgs/form_bg/bg_5.jpg",
+            "imgs/form_bg/bg_6.jpg",
+            "imgs/form_bg/bg_7.jpg",
+            "imgs/form_bg/bg_8.jpg"
+        ];
+        let currentIndex = 0;
+
+        function changeBackground() {
+            // Arka plan resmini değiştir
+            document.body.style.backgroundImage = `url('${images[currentIndex]}')`;
+            currentIndex = (currentIndex + 1) % images.length;
+        }
+
+        // Arka planı her 5 saniyede bir değiştir
+        setInterval(changeBackground, 5000);
+
+        // Sayfa yüklendiğinde ilk arka planı ayarla
+        changeBackground();
+    </script>
     <center>
-        <i><b style="font-size: 24px; color: rgba(255, 255, 255, 0.8);">Kullanici Kayit Formu</b></i>
+        <i><b class="kullanici-giris-formu">Kayıt ol - Fırsatları kaçırma 🎉</b></i>
         <br><br>
         <div class="tablo-kapsayici">
             <table>
                 <form action="kullanicikaydi.php" method="POST">
                     <tr>
-                        <td>Ad: </td>
-                        <td><input type="text" name="ad" required></td>
-                    </tr>
-                    <tr>
-                        <td>Soyad: </td>
-                        <td><input type="text" name="soyad" required></td>
-                    </tr>
-                    <tr>
-                        <td>E-Posta: </td>
-                        <td><input type="email" name="mailadresi" required></td>
-                    </tr>
-                    <tr>
-                        <td>Doğum Tarihi: </td>
-                        <td><input type="date" name="dogumtarihi" required></td>
-                    </tr>
-                    <tr>
-                        <td>Parola: </td>
-                        <td><input type="password" name="parola" required></td>
-                    </tr>
-                    <tr>
-                        <td>Parola Tekrari: </td>
-                        <td><input type="password" name="parolatekrari" required></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: center;">
-                        <input type="submit" value="Kayit Ol" name="kayitol">
+                        <td colspan="2">
+                            <div class="etiketli-girdi">
+                                <label for="ad">Ad</label>
+                                <input type="text" id="ad" name="ad" required>
+                            </div>
+                        </td>
+                        <td colspan="2">
+                            <div class="etiketli-girdi">
+                                <label for="soyad">Soyad</label>
+                                <input type="text" id="soyad" name="soyad" required>
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="text-align: center;">
-                            <a href="girisformu.php" style="text-decoration: none; color: white;">Zaten Hesabim Var</a>
+                        <td colspan="2">
+                            <div class="etiketli-girdi">
+                                <label for="mailadresi">E-Posta</label>
+                                <input type="text" id="mailadres" name="mailadresi" required>
+                            </div>
+                        </td>
+                        <td colspan="2">
+                            <div class="etiketli-girdi">
+                                <label for="dogumtarihi">Doğum Tarihi</label>
+                                <input type="date" id="dogumtarihi" name="dogumtarihi" required>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="etiketli-girdi">
+                                <label for="parola">Parola</label>
+                                <input type="password" id="parola" name="parola" required>
+                            </div>
+                        </td>
+                        <td colspan="2">
+                            <div class="etiketli-girdi">
+                                <label for="parolatekrari">Parola Tekrarı</label>
+                                <input type="password" id="parolatekrari" name="parolatekrari" required>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align: center;">
+                            <div class="giris-yap">
+                                <input type="submit" value="Kayıt Ol" name="kayitol">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align: center;">
+                            <a href="girisformu.php" class="yeni-hesap-link" style="text-decoration: none; color: white;">Zaten Hesabım Var</a>
                         </td>
                     </tr>
                 </form>
@@ -104,4 +111,5 @@
         </div>
     </center>
 </body>
+
 </html>

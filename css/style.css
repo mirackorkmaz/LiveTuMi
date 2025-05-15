@@ -1,11 +1,12 @@
 /*giris formu */
 body.giris {
-    background-image: url('../imgs/cinema.png');
-    background-size: 100% 100%; /* Resmi sayfanın genişliğine ve yüksekliğine sığdır */
-    background-repeat: no-repeat; /* Resmin tekrar etmesini engelle */
-    background-position: center; /* Resmi ortala */
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out;
     height: 100vh; /* Sayfanın yüksekliğini tam olarak kapla */
-    margin: 0; /* Tarayıcı varsayılan boşluklarını kaldır */
     display: flex; /* Flexbox kullanarak içeriği ortala */
     justify-content: center; /* Yatayda ortala */
     align-items: center; /* Dikeyde ortala */
@@ -19,9 +20,11 @@ body.giris {
     overflow: hidden; /* Taşan içeriği gizle */
     position: relative; /* Konumlandırma için gerekli */
     z-index: 1; /* Diğer öğelerin üstünde görünmesi için */
-    filter: blur(0px); /* Arka plan bulanıklığını kaldır */
-    transition: filter 0.3s ease; /* Geçiş efekti ekle */
-    
+    filter: blur(0px); /* Arka plan bulanıklığını kaldır */ 
+}
+/* Arka plan resimlerini önceden yüklemek için görünmez bir div */
+.preload-images {
+    display: none;
 }
 /*bu kısım giriş ekranında e-mail girdisi yazıldığında tarayıcının otomatk doldurma stilinden dolayı arkasının beyaz olmasını engellemek için*/ 
 input:-webkit-autofill,         
