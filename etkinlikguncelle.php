@@ -1,6 +1,6 @@
 <?php
-include("baglanti.php");
-session_start();
+include("baglanti.php"); // Veritabanı bağlantı dosyası dahil ediliyor
+session_start(); // Oturum başlatılıyor
 
 // Eğer oturum açılmamışsa veya oturumdaki id "admin" değilse giriş sayfasına yönlendir
 if (!isset($_SESSION["id"]) || $_SESSION["id"] !== "admin") {
@@ -15,7 +15,7 @@ if (!isset($_GET["id"])) {
     exit;
 }
 
-$etkinlik_id = $_GET["id"];
+$etkinlik_id = $_GET["id"]; // URL'den gelen etkinlik ID'si alınıyor
 
 // Etkinlik bilgilerini çek
 $sorgu = mysqli_query($baglanti, "SELECT * FROM etkinlikler WHERE id = '$etkinlik_id'");
@@ -24,10 +24,11 @@ if (mysqli_num_rows($sorgu) == 0) {
     exit;
 }
 
-$etkinlik = mysqli_fetch_assoc($sorgu);
+$etkinlik = mysqli_fetch_assoc($sorgu); // Etkinlik bilgileri diziye aktarılıyor
 
-// Güncelleme işlemi
+// Form POST edildiğinde güncelleme işlemini başlat
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["etkinlik_guncelle"])) {
+    // Form verilerini al
     $baslik = $_POST["baslik"];
     $aciklama = $_POST["aciklama"];
     $tarih = $_POST["tarih"];
@@ -36,18 +37,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["etkinlik_guncelle"])) 
     $fiyat = $_POST["fiyat"];
     $stok = $_POST["stok"];
 
-    // Fotoğraf güncelleme
+    // Fotoğraf güncelleme işlemi
     if (!empty($_FILES["foto"]["name"])) {
         // `imgs/` dizini yoksa oluştur
         if (!is_dir("imgs")) {
             mkdir("imgs", 0777, true);
         }
 
+        // Fotoğraf yükleme işlemleri
         $foto = $_FILES["foto"]["name"];
         $foto_tmp = $_FILES["foto"]["tmp_name"];
         $foto_yolu = "imgs/" . $foto;
 
-        // Dosyayı taşı
+        // Dosyayı belirtilen konuma taşı
         if (move_uploaded_file($foto_tmp, $foto_yolu)) {
             echo "<p>Fotoğraf başarıyla yüklendi.</p>";
         } else {
@@ -55,16 +57,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["etkinlik_guncelle"])) 
             exit;
         }
     } else {
+        // Yeni fotoğraf yüklenmediyse mevcut fotoğrafı kullan
         $foto_yolu = $etkinlik["foto"];
     }
 
-    // Veritabanını güncelle
+    // Veritabanında güncelleme sorgusu hazırla ve çalıştır
     $guncelle_sorgu = "UPDATE etkinlikler SET baslik = ?, aciklama = ?, tarih = ?, tur = ?, ilgi_alani = ?, foto = ?, fiyat = ?, stok = ? WHERE id = ?";
     $stmt = $baglanti->prepare($guncelle_sorgu);
     $stmt->bind_param("ssssssdii", $baslik, $aciklama, $tarih, $tur, $ilgi_alani, $foto_yolu, $fiyat, $stok, $etkinlik_id);
     $stmt->execute();
     $stmt->close();
 
+    // Başarılı güncelleme mesajı ve yönlendirme
     echo "<p>Etkinlik başarıyla güncellendi!</p>";
     header("Refresh: 2; url=yonetici.php");
     exit;
@@ -78,6 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["etkinlik_guncelle"])) 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etkinlik Güncelle</title>
+    <!-- Sayfa stilleri -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -125,6 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["etkinlik_guncelle"])) 
 </head>
 
 <body>
+    <!-- Etkinlik güncelleme formu -->
     <div class="form-container">
         <h2>Etkinlik Güncelle</h2>
         <form method="post" action="" enctype="multipart/form-data">
