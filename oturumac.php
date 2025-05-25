@@ -37,7 +37,7 @@ if (mysqli_num_rows($sorgu) == 0) {
     if ($ilk_giris == 1) {
         // İlk giriş yapan kullanıcının hesap durumunu kontrol et
         if ($status !== "onaylandi") {
-            echo "<center><br>Şifreniz güncellendi fakat hesabınız henüz onaylanmadı. Yönetici onayını beklemeniz gerekmektedir.</center>";
+            echo "<center><br>Yönetici onayını beklemeniz gerekmektedir.</center>";
             header("Refresh: 4; url=girisformu.php");
             exit;
         }

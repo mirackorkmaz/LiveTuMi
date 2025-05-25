@@ -132,7 +132,7 @@ if (isset($_SESSION["id"])) { // Oturum kontrolü yapılıyor
             initSlider();
 
             // Her 7 saniyede bir sonraki slayta geç
-            setInterval(nextSlide, 7000);
+            setInterval(nextSlide, 5000);
         });
     </script>
 

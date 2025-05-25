@@ -253,103 +253,9 @@ if (!isset($_SESSION["id"]) || $_SESSION["id"] !== "admin") {
         <a href="cikis.php">Çıkış Yap</a>
     </div>
 
-    <!-- Bölüm 1 ve 2 - Gelecekteki özellikler için ayrılmış alanlar -->
-    <section id="yonetici-bolum1">
-        <h2>Bölüm 1: Diğer İşlemler</h2>
-        <p>Bu alan aşkomun işlemleri için ayrılmıştır.</p>
-    </section>
-
-    <section id="yonetici-bolum2">
-        <h2>Bölüm 2: Slider Yönetimi</h2>
-        
-        <!-- Slider fotoğraf ekleme formu -->
-        <div class="slider-form">
-            <h3>Yeni Slider Fotoğrafı Ekle</h3>
-            <form method="post" enctype="multipart/form-data">
-                <label for="slider_foto">Fotoğraf Seçin:</label>
-                <input type="file" name="slider_foto" id="slider_foto" required accept="image/*">
-                
-                <label for="sira">Gösterim Sırası:</label>
-                <input type="number" name="sira" id="sira" min="1" required>
-                
-                <input type="submit" name="slider_foto_ekle" value="Fotoğraf Ekle">
-            </form>
-        </div>
-
-        <!-- Mevcut slider fotoğrafları listesi -->
-        <div class="slider-list">
-            <h3>Mevcut Slider Fotoğrafları</h3>
-            <div class="slider-grid">
-                <?php
-                $slider_sorgu = mysqli_query($baglanti, "SELECT * FROM slider_fotograflar ORDER BY sira ASC");
-                while ($foto = mysqli_fetch_assoc($slider_sorgu)) {
-                    echo "<div class='slider-item'>";
-                    echo "<img src='" . $foto['foto_yolu'] . "' alt='Slider Fotoğraf'>";
-                    echo "<p>Sıra: " . $foto['sira'] . "</p>";
-                    echo "<form method='post'>";
-                    echo "<input type='hidden' name='slider_foto_id' value='" . $foto['id'] . "'>";
-                    echo "<input type='submit' name='slider_foto_sil' value='Sil' class='sil-btn'>";
-                    echo "</form>";
-                    echo "</div>";
-                }
-                ?>
-            </div>
-        </div>
-
-        <?php
-        // Slider fotoğraf ekleme işlemi
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["slider_foto_ekle"])) {
-            if (!empty($_FILES["slider_foto"]["name"])) {
-                $foto = $_FILES["slider_foto"]["name"];
-                $foto_tmp = $_FILES["slider_foto"]["tmp_name"];
-                $foto_yolu = "imgs/slider/" . $foto;
-                $sira = $_POST["sira"];
-
-                // Slider klasörü yoksa oluştur
-                if (!is_dir("imgs/slider")) {
-                    mkdir("imgs/slider", 0777, true);
-                }
-
-                // Fotoğrafı yükle ve veritabanına ekle
-                if (move_uploaded_file($foto_tmp, $foto_yolu)) {
-                    $ekle_sorgu = "INSERT INTO slider_fotograflar (foto_yolu, sira) VALUES (?, ?)";
-                    $stmt = $baglanti->prepare($ekle_sorgu);
-                    $stmt->bind_param("si", $foto_yolu, $sira);
-                    
-                    if ($stmt->execute()) {
-                        echo "<p>Slider fotoğrafı başarıyla eklendi.</p>";
-                        header("Refresh: 2");
-                    } else {
-                        echo "<p>Fotoğraf eklenirken bir hata oluştu.</p>";
-                    }
-                }
-            }
-        }
-
-        // Slider fotoğraf silme işlemi
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["slider_foto_sil"])) {
-            $foto_id = $_POST["slider_foto_id"];
-            
-            // Önce fotoğraf yolunu al
-            $foto_sorgu = mysqli_query($baglanti, "SELECT foto_yolu FROM slider_fotograflar WHERE id = $foto_id");
-            $foto = mysqli_fetch_assoc($foto_sorgu);
-            
-            // Veritabanından sil
-            if (mysqli_query($baglanti, "DELETE FROM slider_fotograflar WHERE id = $foto_id")) {
-                // Dosyayı fiziksel olarak sil
-                if (file_exists($foto['foto_yolu'])) {
-                    unlink($foto['foto_yolu']);
-                }
-                echo "<p>Slider fotoğrafı başarıyla silindi.</p>";
-                header("Refresh: 2");
-            }
-        }
-        ?>
-    </section>
-
     <!-- Kullanıcı yönetim bölümü -->
     <section id="yonetici-bolum3">
-        <h2>Bölüm 3: Kullanıcı Yönetimi</h2>
+        <h2>Bölüm 1: Kullanıcı Yönetimi</h2>
         <?php
         // Tüm kullanıcıları veritabanından çek
         $sorgu = mysqli_query($baglanti, "SELECT id, ad, soyad, mailadresi, dogumtarihi, status FROM kullanicilar");
@@ -413,9 +319,97 @@ if (!isset($_SESSION["id"]) || $_SESSION["id"] !== "admin") {
         ?>
     </section>
 
+    <section id="yonetici-bolum2">
+        <h2>Bölüm 2: Slider Yönetimi</h2>
+
+        <!-- Slider fotoğraf ekleme formu -->
+        <div class="slider-form">
+            <h3>Yeni Slider Fotoğrafı Ekle</h3>
+            <form method="post" enctype="multipart/form-data">
+                <label for="slider_foto">Fotoğraf Seçin:</label>
+                <input type="file" name="slider_foto" id="slider_foto" required accept="image/*">
+
+                <label for="sira">Gösterim Sırası:</label>
+                <input type="number" name="sira" id="sira" min="1" required>
+
+                <input type="submit" name="slider_foto_ekle" value="Fotoğraf Ekle">
+            </form>
+        </div>
+
+        <!-- Mevcut slider fotoğrafları listesi -->
+        <div class="slider-list">
+            <h3>Mevcut Slider Fotoğrafları</h3>
+            <div class="slider-grid">
+                <?php
+                $slider_sorgu = mysqli_query($baglanti, "SELECT * FROM slider_fotograflar ORDER BY sira ASC");
+                while ($foto = mysqli_fetch_assoc($slider_sorgu)) {
+                    echo "<div class='slider-item'>";
+                    echo "<img src='" . $foto['foto_yolu'] . "' alt='Slider Fotoğraf'>";
+                    echo "<p>Sıra: " . $foto['sira'] . "</p>";
+                    echo "<form method='post'>";
+                    echo "<input type='hidden' name='slider_foto_id' value='" . $foto['id'] . "'>";
+                    echo "<input type='submit' name='slider_foto_sil' value='Sil' class='sil-btn'>";
+                    echo "</form>";
+                    echo "</div>";
+                }
+                ?>
+            </div>
+        </div>
+
+        <?php
+        // Slider fotoğraf ekleme işlemi
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["slider_foto_ekle"])) {
+            if (!empty($_FILES["slider_foto"]["name"])) {
+                $foto = $_FILES["slider_foto"]["name"];
+                $foto_tmp = $_FILES["slider_foto"]["tmp_name"];
+                $foto_yolu = "imgs/slider/" . $foto;
+                $sira = $_POST["sira"];
+
+                // Slider klasörü yoksa oluştur
+                if (!is_dir("imgs/slider")) {
+                    mkdir("imgs/slider", 0777, true);
+                }
+
+                // Fotoğrafı yükle ve veritabanına ekle
+                if (move_uploaded_file($foto_tmp, $foto_yolu)) {
+                    $ekle_sorgu = "INSERT INTO slider_fotograflar (foto_yolu, sira) VALUES (?, ?)";
+                    $stmt = $baglanti->prepare($ekle_sorgu);
+                    $stmt->bind_param("si", $foto_yolu, $sira);
+
+                    if ($stmt->execute()) {
+                        echo "<p>Slider fotoğrafı başarıyla eklendi.</p>";
+                        header("Refresh: 2");
+                    } else {
+                        echo "<p>Fotoğraf eklenirken bir hata oluştu.</p>";
+                    }
+                }
+            }
+        }
+
+        // Slider fotoğraf silme işlemi
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["slider_foto_sil"])) {
+            $foto_id = $_POST["slider_foto_id"];
+
+            // Önce fotoğraf yolunu al
+            $foto_sorgu = mysqli_query($baglanti, "SELECT foto_yolu FROM slider_fotograflar WHERE id = $foto_id");
+            $foto = mysqli_fetch_assoc($foto_sorgu);
+
+            // Veritabanından sil
+            if (mysqli_query($baglanti, "DELETE FROM slider_fotograflar WHERE id = $foto_id")) {
+                // Dosyayı fiziksel olarak sil
+                if (file_exists($foto['foto_yolu'])) {
+                    unlink($foto['foto_yolu']);
+                }
+                echo "<p>Slider fotoğrafı başarıyla silindi.</p>";
+                header("Refresh: 2");
+            }
+        }
+        ?>
+    </section>
+
     <!-- Etkinlik yönetim bölümü -->
     <section id="yonetici-bolum4">
-        <h2>Bölüm 4: Etkinlik Yönetimi</h2>
+        <h2>Bölüm 3: Etkinlik Yönetimi</h2>
 
         <!-- Etkinlik ekleme formu -->
         <h3>Yeni Etkinlik Ekle</h3>
